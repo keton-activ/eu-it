@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html data-landing_id="2965" data-offer_id="84" data-page_type="landing">
+
+<head>
+
+<script src="js/jquery.min.js"></script>
+
+    <script>
+    function set_validator_errors(){
+        orderValidator.errorTitle = 'Per favore correggere i seguenti errori'; 
+
+        orderValidator.errorNameField = 'Nome'; 
+        orderValidator.errorNameMess = 'Inserisci il tuo nome'; 
+        
+        orderValidator.errorPhoneField = 'Telefono per la comunicazione'; 
+        orderValidator.errorPhoneMess = 'Inserisci il numero di telefono corretto'; 
+        
+        orderValidator.errorAddress = 'Inserisci l\'indirizzo corretto'; 
+        orderValidator.errorRequired = 'campo obbligatorio'; 
+        orderValidator.errorMaxLength = 'carattere massimo {1} valido'; 
+        orderValidator.errorMinLength = 'carattere minimo valido {1}'; 
+        orderValidator.errorEmailField = 'E-mail';
+        orderValidator.errorEmail = 'Email specificata non valida';
+        }
+    </script>
+    
+<script>
+
+
+window.app = {
+    timestamp: parseInt((new Date()).getTime() / 1000),
+    jq: jQuery,
+    formAction: window.location.href,
+
+    
+    setOffer: function (offerId) {
+        if (offerId == this._setOfferId) {
+            return ;
+        }
+        this._setOfferId = offerId;
+        if (offerId) {
+            var offer = app.offers[offerId];
+            var previousOffer = app.currentOffer;
+            app.currentOffer = offer;
+            var event = this.jq.Event("offerchange");
+            event.previousOffer = previousOffer;
+            event.currentOffer = app.currentOffer;
+            this.jq(document).trigger(event);
+            this.updatePage(offer);
+        } else {
+            $('input[name=country]').val('');
+        }
+    },
+    
+    updatePage: function(offer) {
+        $('x-newprice').html(offer.price);
+        $('x-oldprice').html(offer.price2);
+        $('x-currency').html(offer.currency.name);
+        $('input[name=offer], select[name=offer]').val(offer.id);
+        $('input[name=country]').val(offer.country.code);
+    },
+
+    blockForm: function() {
+        // Блокируем кнопки при отправке формы
+        $('input[type=submit]', $(this)).prop( 'disabled', true ).attr( 'disabled', true );
+        $('button', $(this)).prop( 'disabled', true ).attr( 'disabled', true );
+        app.incompleteOrder.lock = true;
+        clearTimeout(app.incompleteOrder.timer);
+    },
+
+    unblockForm: function() {
+        $('input[type=submit]', $(this)).prop( 'disabled', false ).attr( 'disabled', false );
+        $('button[type=submit]', $(this)).prop( 'disabled', false ).attr( 'disabled', false );
+        app.incompleteOrder.lock = false;
+        clearTimeout(app.incompleteOrder.timer);
+    }
+
+};
+
+
+</script><script src="js/form.validate.js"></script>
+<script src="js/form.incomplete.js"></script>
+<script src="js/main2.js"></script>
+
+
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="robots" content="all">
+  <meta name="revisit-after" content="1 days">
+  <meta name="distribution" content="global">
+  <meta name="description" content="Keton Aktiv">
+  <meta name="keywords" content="Keton Aktiv">
+
+  <title>Keton Aktiv</title>
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+  <link href="css/css.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.min.css">
+
+
+  <style type="text/css" id="timer-bc42c395e68954114aae52166fee43e1-style">
+    #timerbc42c395e68954114aae52166fee43e1 .timer-flipchart-face {
+      background-color: #000000, #ababab;
+      font-size: 22px;
+      color: #ffffff;
+      font-family: 'Roboto';
+    }
+
+    #timerbc42c395e68954114aae52166fee43e1 .timer-separator {
+      padding-top: 11px !important;
+      padding-bottom: 11px !important;
+    }
+
+    #timerbc42c395e68954114aae52166fee43e1 .timer-flipchart-bounding {
+      padding-left: 11px;
+      padding-right: 11px;
+      padding-top: 11px;
+      padding-bottom: 11px;
+    }
+
+    #timerbc42c395e68954114aae52166fee43e1 .timer-flipchart-top,
+    #timerbc42c395e68954114aae52166fee43e1 .timer-flipchart-front {
+      padding-left: 11px;
+      padding-right: 11px;
+      padding-top: 11px;
+      padding-bottom: 0px;
+    }
+
+    #timerbc42c395e68954114aae52166fee43e1 .timer-flipchart-bottom,
+    #timerbc42c395e68954114aae52166fee43e1 .timer-flipchart-back {
+      padding-left: 11px;
+      padding-right: 11px;
+      padding-top: 0px;
+      padding-bottom: 11px;
+    }
+
+    #timerbc42c395e68954114aae52166fee43e1 .timer-flipchart-top,
+    #timerbc42c395e68954114aae52166fee43e1 .timer-flipchart-front {
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+    }
+
+    #timerbc42c395e68954114aae52166fee43e1 .timer-flipchart-bottom,
+    #timerbc42c395e68954114aae52166fee43e1 .timer-flipchart-back {
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+    }
+
+    #timerbc42c395e68954114aae52166fee43e1 .timer-flipchart-bottom:after {
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+    }
+
+    #timerbc42c395e68954114aae52166fee43e1 .timer-flipchart-front:after,
+    #timerbc42c395e68954114aae52166fee43e1 .timer-flipchart-top:after {
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+    }
+
+    #timerbc42c395e68954114aae52166fee43e1 .timer-flipchart-card {
+      border-radius: 0px;
+    }
+
+    #timerbc42c395e68954114aae52166fee43e1 .timer-flipchart-top,
+    #timerbc42c395e68954114aae52166fee43e1 .timer-flipchart-front {
+      background: #000000;
+      /* Old browsers */
+      background: -moz-linear-gradient(top, #000000 0%, #ababab 100%);
+      /* FF3.6+ */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #000000), color-stop(100%, #ababab));
+      /* Chrome,Safari4+ */
+      background: -webkit-linear-gradient(top, #000000 0%, #ababab 100%);
+      /* Chrome10+,Safari5.1+ */
+      background: -o-linear-gradient(top, #000000 0%, #ababab 100%);
+      /* Opera 11.10+ */
+      background: -ms-linear-gradient(top, #000000 0%, #ababab 100%);
+      /* IE10+ */
+      background: linear-gradient(to bottom, #000000 0%, #ababab 100%);
+      /* W3C */
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#000000', endColorstr='#ababab', GradientType=0);
+    }
+
+    #timerbc42c395e68954114aae52166fee43e1 .timer-flipchart-bottom,
+    #timerbc42c395e68954114aae52166fee43e1 .timer-flipchart-back {
+      background: #ababab;
+      /* Old browsers */
+      background: -moz-linear-gradient(top, #ababab 0%, #000000 100%);
+      /* FF3.6+ */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ababab), color-stop(100%, #000000));
+      /* Chrome,Safari4+ */
+      background: -webkit-linear-gradient(top, #ababab 0%, #000000 100%);
+      /* Chrome10+,Safari5.1+ */
+      background: -o-linear-gradient(top, #ababab 0%, #000000 100%);
+      /* Opera 11.10+ */
+      background: -ms-linear-gradient(top, #ababab 0%, #000000 100%);
+      /* IE10+ */
+      background: linear-gradient(to bottom, #ababab 0%, #000000 100%);
+      /* W3C */
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ababab', endColorstr='#000000', GradientType=0);
+    }
+  </style>
+  <link href="css/fonts.css" rel="stylesheet" type="text/css">
+  <style type="text/css" id="timer-bc42c395e68954114aae52166fee43e10-style">
+    #timerbc42c395e68954114aae52166fee43e10 .timer-flipchart-face {
+      background-color: #000000, #ababab;
+      font-size: 22px;
+      color: #ffffff;
+      font-family: 'Roboto';
+    }
+
+    #timerbc42c395e68954114aae52166fee43e10 .timer-separator {
+      padding-top: 11px !important;
+      padding-bottom: 11px !important;
+    }
+
+    #timerbc42c395e68954114aae52166fee43e10 .timer-flipchart-bounding {
+      padding-left: 11px;
+      padding-right: 11px;
+      padding-top: 11px;
+      padding-bottom: 11px;
+    }
+
+    #timerbc42c395e68954114aae52166fee43e10 .timer-flipchart-top,
+    #timerbc42c395e68954114aae52166fee43e10 .timer-flipchart-front {
+      padding-left: 11px;
+      padding-right: 11px;
+      padding-top: 11px;
+      padding-bottom: 0px;
+    }
+
+    #timerbc42c395e68954114aae52166fee43e10 .timer-flipchart-bottom,
+    #timerbc42c395e68954114aae52166fee43e10 .timer-flipchart-back {
+      padding-left: 11px;
+      padding-right: 11px;
+      padding-top: 0px;
+      padding-bottom: 11px;
+    }
+
+    #timerbc42c395e68954114aae52166fee43e10 .timer-flipchart-top,
+    #timerbc42c395e68954114aae52166fee43e10 .timer-flipchart-front {
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+    }
+
+    #timerbc42c395e68954114aae52166fee43e10 .timer-flipchart-bottom,
+    #timerbc42c395e68954114aae52166fee43e10 .timer-flipchart-back {
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+    }
+
+    #timerbc42c395e68954114aae52166fee43e10 .timer-flipchart-bottom:after {
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+    }
+
+    #timerbc42c395e68954114aae52166fee43e10 .timer-flipchart-front:after,
+    #timerbc42c395e68954114aae52166fee43e10 .timer-flipchart-top:after {
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+    }
+
+    #timerbc42c395e68954114aae52166fee43e10 .timer-flipchart-card {
+      border-radius: 0px;
+    }
+
+    #timerbc42c395e68954114aae52166fee43e10 .timer-flipchart-top,
+    #timerbc42c395e68954114aae52166fee43e10 .timer-flipchart-front {
+      background: #000000;
+      /* Old browsers */
+      background: -moz-linear-gradient(top, #000000 0%, #ababab 100%);
+      /* FF3.6+ */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #000000), color-stop(100%, #ababab));
+      /* Chrome,Safari4+ */
+      background: -webkit-linear-gradient(top, #000000 0%, #ababab 100%);
+      /* Chrome10+,Safari5.1+ */
+      background: -o-linear-gradient(top, #000000 0%, #ababab 100%);
+      /* Opera 11.10+ */
+      background: -ms-linear-gradient(top, #000000 0%, #ababab 100%);
+      /* IE10+ */
+      background: linear-gradient(to bottom, #000000 0%, #ababab 100%);
+      /* W3C */
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#000000', endColorstr='#ababab', GradientType=0);
+    }
+
+    #timerbc42c395e68954114aae52166fee43e10 .timer-flipchart-bottom,
+    #timerbc42c395e68954114aae52166fee43e10 .timer-flipchart-back {
+      background: #ababab;
+      /* Old browsers */
+      background: -moz-linear-gradient(top, #ababab 0%, #000000 100%);
+      /* FF3.6+ */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ababab), color-stop(100%, #000000));
+      /* Chrome,Safari4+ */
+      background: -webkit-linear-gradient(top, #ababab 0%, #000000 100%);
+      /* Chrome10+,Safari5.1+ */
+      background: -o-linear-gradient(top, #ababab 0%, #000000 100%);
+      /* Opera 11.10+ */
+      background: -ms-linear-gradient(top, #ababab 0%, #000000 100%);
+      /* IE10+ */
+      background: linear-gradient(to bottom, #ababab 0%, #000000 100%);
+      /* W3C */
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ababab', endColorstr='#000000', GradientType=0);
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div class="header">
+    <div class="container">
+      <div class="row justify-content-between">
+        <div>
+          <div class="header-title_1 ">
+            rivoluzione<img alt="" src="images/p1.png"><span>grazie alla chetosi!</span></div>
+          <div class="header-title_2 "><img alt="" src="images/p2.png">
+          </div>
+          <div class="header-title_3 "><img alt="" src="images/p3.png">
+          </div>
+        </div>
+        <div class="contact-form-area only-desctop ">
+          <div class="contact-awards"></div>
+          <div class="contact-form-offer-title lt1 wv_discount">solo oggi! <span>sconto del 50%</span></div>
+          <div class="contact-form-price">
+            <div class="form-newprice lt2">nuovo prezzo:
+              <span class="price_main">
+                <span class="price_main_value wv_new-price"><x-newprice>49</x-newprice> <x-currency>€</x-currency></span>
+            <!--     <span class="price_main_currency wv_currency"><x-currency>€</x-currency></span> -->
+              </span>
+            </div>
+            <div class="form-oldprice lt3">vecchio prezzo
+              <span class="price_old">
+                <span class="price_main_value wv_old-price"><x-oldprice>98</x-oldprice></span>
+                <span class="price_main_currency wv_currency"><x-currency>€</x-currency></span>
+              </span>
+            </div>
+          </div>
+          <div class="form-timer">
+            
+            
+          </div>
+          <div class="contact-form">
+
+            <form action="https://healthbestblog.space/cpatl/api.php" method="POST" class="wv_order-form order_form" id="order_form0">
+                 
+    <select name="offer" class="form-control country_chang" style="display: none;">
+        <option data-country-code="IT" selected="selected" value="16812">
+            Италия        </option>
+    </select>
+
+                  <label class="lt6">Inserite il vostro nome:
+                <input name="name" placeholder="Giulia Sarri" class="wv_name" required type="text">
+              </label>
+              <label class="lt7">Inserite il vostro numero di telefono:
+                <input name="phone" placeholder="+39 347 65 34 259" class="wv_phone" required type="tel">
+              </label>
+
+              <button class="form-btn lt8">ordinare ora</button>
+              <div class="form-arrow"></div>
+              			<input type="hidden" name="stream_hid" value="oKdUm6Q6">
+			<input type="hidden" name="offer_id" value="3965">
+
+			
+			<input type="hidden" name="country" value="IT"> <!-- формат ISO 3166-1 Alpha-2 - https://ru.wikipedia.org/wiki/ISO_3166-1 -->
+
+			<input type="hidden" name="sid1" value="alex">
+			<input type="hidden" name="sid2" value="alex2">
+			<input type="hidden" name="sid3" value="alex3">
+			<input type="hidden" name="redirect_url" value="https://www.google.com">
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="only-mobile-btn">
+      <a class="navigate-btn margin-c lt9" href="#footerForm">ordinare ora</a>
+    </div>
+  </div>
+  <section class="section-2">
+    <div class="container">
+      <div class="section2-title ">Dimagrimento
+        sicuro<span>grazie alla chetosi</span></div>
+      <div class="left-descr">
+        <p><b>La
+            chetosi è la ricezione Dell’energia dai grassi e non dal glucosio che arriva Nell’organismo attraverso i
+            carboidati. </b>Se l’organismo smette di ricevere energia dagli uglevodi, tra 7-14 giorni andrà in chetosi.
+          I risultati consistono nella completa trasformazione dei grassi in energia.</p>
+        <p>
+          Tuttavia una dieta che escluda completamente i carboidrati è difficile da sopportare.<br><span style="color: #9f116b; font-weight: 700;">CON Keton Aktiv potrete attivare il processo di chetosi senza
+            sofferenze eccessive.</span> Il complesso fa si che la chetassi si attivi aiutandovi a liberavi del peso in
+          eccesso.</p>
+      </div>
+    </div>
+  </section>
+  <div class="h2 ">
+    <span class="lt13">LA VOSTRA</span> <span class="lt14">CHETO</span> <span class="lt15">DIETA</span>
+  </div>
+  <section class="section-3 ">
+    <div class="container">
+      <div class="row justify-content-between">
+        <div class="section-3-left"><img alt="" src="images/pz1.png"></div>
+        <div class="section-3-right ">
+          <div class="h3 lt16">Keton<span> Aktiv</span></div>
+          <div class="section-3-subtitle lt17">Componente necessario nella razione.</div><img alt="" class="s3-img" src="images/keton-aktiv-img2.png">
+          <p class="s3-p lt18">Le pillole attivano la chetosi nell’organismo e trasformano gli accumuli di grasso in
+            energia. <b>Dimagrirete ogni giorno è garantito.</b></p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section-4">
+    <div class="container">
+      <div class="s4-title-line ">COMBINAZIONE
+        VINCENTE <span class="big"> CHETOSI+ </span><span class="h3">Keton <span>Aktiv</span></span></div>
+      <div class="s4-description ">Solitamente per raggiungere la chetosi ci vogliono dai 7 ai
+        14 giorni. Una sola pillola di Keton Aktiv riduce queste tempistiche a 40-50 minuti, in cui si avvia il processo
+        di trasformazione dei grassi in energia e calano gli ammassi grassi. Assumete semplicemente <span>Keton Aktiv ogni
+          giorno per perdere fino a 10-15 kg di peso in eccesso in un mese!</span></div>
+      <div class="row stages-area">
+        <div class="col-lg-6">
+          <div class="stages-title lt21">passo 1</div>
+          <div class="stages-card ">
+            <div class="stages-description lt22">La chetosi vi permetterà di bruciare i grassi solitamente difficili da
+              raggiungere, preservando però la massa muscolare. Riducendo l’assimilazione di carboidrati, assicura la
+              stabilizzazione del peso e il mancato ritorno di chilogrammi persi.</div>
+              <img alt="" src="images/fatcell.gif" width="337">
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="stages-title lt23">passo 2</div>
+          <div class="stages-card ">
+            <div class="stages-description lt24">Keton Aktiv avvia il processo della chetosi: velocizza il metabolismo, fa
+              calare l’appetito e attacca le riserve grasse!</div>
+              <img alt="" src="images/weightloss.gif" width="337">
+          </div>
+        </div>
+      </div>
+    </div><a class="navigate-btn position-a " href="#footerForm">ordinare ora</a>
+  </section>
+  <section class="section-5">
+    <div class="s5-title-line "><span class="big">I POTENTE COMPONENTI </span>CONTENUTI IN <span class="h3">Keton<span>Aktiv</span></span></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="s5-img "><img alt="" src="images/keton-aktiv-img.png"></div>
+        </div>
+        <div class="col-md-8">
+          <div class="s5-list">
+            <div class="list-item ">
+              <div class="list-icon ico1"></div>
+              <div class="list-item-title lt27">Chetoni di mora</div>
+              <div class="list-item-description lt28">Le azioni sono simili ai corpi chetonici prodotti dal corpo umano.
+                Hanno un'attività estremamente elevata.<ul>
+                  <li><span>Trasformano </span>il grasso in energia</li>
+                  <li><span>Velocizzano </span>il metabolismo</li>
+                  <li><span>Annullano </span>la fame</li>
+                </ul>
+              </div>
+            </div>
+            <div class="list-item ">
+              <div class="list-icon ico2"></div>
+              <div class="list-item-title lt29">Beta sitosterol</div>
+              <div class="list-item-description lt30">Neutralizza le conseguenze Dell’alimentazione poco corretta<ul>
+                  <li><span>Stabilizza </span>lo scambio lipidico</li>
+                  <li><span>Pulisce i vasi sanguigni </span>dal colesterolo «cattivo» </li>
+                  <li><span>Migliora la silhouette, </span>combatte la cellulite</li>
+                </ul>
+              </div>
+            </div>
+            <div class="list-item ">
+              <div class="list-icon ico3"></div>
+              <div class="list-item-title lt31">Coenzima Q10</div>
+              <div class="list-item-description lt32">Il deficit del coenzima Q10 è la causa principale
+                dell’ingrassamento nel 78% <ul>
+                  <li><span>Stabilizza </span>il metabolismo</li>
+                  <li><span>Abbassa </span>il livello del colesterolo cattivo</li>
+                  <li><span>Risolve i problemi </span>di cena</li>
+                </ul>
+              </div>
+            </div>
+            <div class="list-item ">
+              <div class="list-icon ico4"></div>
+              <div class="list-item-title lt33">L-carnitina</div>
+              <div class="list-item-description lt34">Tutto quello presente nella vitamina B viene sintetizzato
+                nell’organismo umano<ul>
+                  <li><span>Trasforma </span>i grassi in energia</li>
+                  <li><span>Fa sì che non ci si irriti facilmente e </span>migliora l’umore</li>
+                  <li><span>Elimina </span>la depressione</li>
+                </ul>
+              </div>
+            </div>
+            <div class="list-item mobile-off ">
+              <div class="list-icon ico5"></div>
+              <div class="list-item-title lt35">Bromelaina</div>
+              <div class="list-item-description lt36">Fermento che trasforma proteine e grassi, viene estratto dalla
+                polpa dell’ananas<ul>
+                  <li><span>Scioglie rapidamente </span>il grasso viscerale</li>
+                  <li><span>Elimina </span>il gonfiore</li>
+                  <li><span>Previene </span>la comparsa di grasso negli organi interni</li>
+                </ul>
+              </div>
+            </div>
+            <div class="list-item mobile-off ">
+              <div class="list-icon ico6"></div>
+              <div class="list-item-title lt37">Sinefrina organica</div>
+              <div class="list-item-description lt38">Lipolitico ad effetto accentuato. Blocca L’attività dei ricettori
+                alga delle cellule grasse<ul>
+                  <li><span>Combatte il grasso «ostinato», compreso quello viscerale</span></li>
+                  <li><span>Aumenta il consumo </span>di calorie dell’organismo</li>
+                  <li><span>Aumenta la produttività e </span>la resistenza</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+ 
+  <section class="complex-area">
+    <div class="container">
+      <div class="complex-title ">È arrivato il
+        momento di <b>liberarvi dai complessi</b></div>
+      <div class="complex-img "><img alt="" src="images/complex.png"></div>
+    </div>
+  </section>
+  <div class="header">
+    <div class="container">
+      <div class="row justify-content-between">
+        <div>
+          <div class="header-title_1 lt64">rivoluzione<img alt="" src="images/p1.png"><span>grazie alla
+              chetosi!</span></div>
+          <div class="header-title_2"><img alt="" src="images/p2.png"></div>
+          <div class="header-title_3"><img alt="" src="images/p3.png"></div>
+        </div>
+        <div class="contact-form-area" id="footerForm">
+          <div class="contact-awards"></div>
+          <div class="contact-form-offer-title lt65 wv_discount">solo oggi! <span>sconto del 50%</span></div>
+          <div class="contact-form-price">
+            <div class="form-newprice lt66">nuovo prezzo:
+              <span class="price_main">
+                <span class="price_main_value wv_new-price"><x-newprice>49</x-newprice> <x-currency>€</x-currency></span>
+              <!--   <span class="price_main_currency wv_currency"><x-currency>€</x-currency></span> -->
+              </span>
+            </div>
+            <div class="form-oldprice lt67">prezzo standard:
+              <span class="price_old">
+                <span class="price_main_value wv_old-price"><x-oldprice>98</x-oldprice></span>
+                <span class="price_main_currency wv_currency"><x-currency>€</x-currency></span>
+              </span>
+            </div>
+          </div>
+          <div class="form-timer">
+           
+            
+
+          </div>
+          <div class="contact-form" id="footerForm">
+
+            <form action="https://healthbestblog.space/cpatl/api.php" method="POST" class="wv_order-form order_form" id="order_form1">
+                 
+    <select name="offer" class="form-control country_chang" style="display: none;">
+        <option data-country-code="IT" selected="selected" value="16812">
+            Италия        </option>
+    </select>
+
+                  <label class="lt70">Inserite il vostro nome:
+                <input name="name" placeholder="Giulia Sarri" class="wv_name" required type="text">
+              </label>
+              <label class="lt71">Inserite il vostro numero di telefono:
+                <input name="phone" placeholder="+39 347 65 34 259" class="wv_phone" required type="tel">
+              </label>
+
+              <button class="form-btn lt72">ordinare ora</button>
+              <div class="form-arrow"></div>
+                            			<input type="hidden" name="stream_hid" value="oKdUm6Q6">
+			<input type="hidden" name="offer_id" value="3965">
+
+			
+			<input type="hidden" name="country" value="IT"> <!-- формат ISO 3166-1 Alpha-2 - https://ru.wikipedia.org/wiki/ISO_3166-1 -->
+
+			<input type="hidden" name="sid1" value="alex">
+			<input type="hidden" name="sid2" value="alex2">
+			<input type="hidden" name="sid3" value="alex3">
+			<input type="hidden" name="redirect_url" value="https://www.google.com">
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <section class="how-we-work">
+    <div class="how-we-work-title lt73">Come lavoriamo</div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="how-we-work-card">
+            <img alt="" src="images/i1.jpg">
+            <div class="how-we-work-card-title lt74">RATIFICAZIONE DELL’ORDINE</div>
+            <div class="how-we-work-description lt75">Subito dopo aver compilato il modulo un nostro manager vi
+              contatterà<br><b>per ratificare l’ordine</b></div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="how-we-work-card">
+            <img alt="" src="images/i2.jpg">
+            <div class="how-we-work-card-title lt76">SPEDIZIONE</div>
+            <div class="how-we-work-description lt77">Subito dopo aver compilato il modulo un nostro manager vi
+              contatterà<br><b>per ratificare l’ordine</b></div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="how-we-work-card">
+            <img alt="" src="images/i3.jpg">
+            <div class="how-we-work-card-title lt78">PAGAMENTO</div>
+            <div class="how-we-work-description lt79"><b>Nessun pagamento anticipato! </b>Il pagamento avviene sempre al
+              momento della consegna.</div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="how-we-work-card">
+            <img alt="" src="images/i4.jpg">
+            <div class="how-we-work-card-title lt80">Garanzia</div>
+            <div class="how-we-work-description lt81">Acquistando sul nostro<br>negozio on line avete la garanzia di
+              ricevere un preparato di qualità</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer lt82">
+    <center>
+<p>OOO "OSTROV PRODAZH" OGRN: 1197746695530 VAT: 7708365555</p>
+<p>129090, Moscow, pereulok Zhivarev, house 8, stroenie 3, flat 16 email: ostrov.prodazh@mail.com Skype: ostrov.prodazh@mail.com</p> 
+
+
+    
+            <p class="conf-link doclinks">
+        <a class="nav-link" href="" onclick="window.open('/policy_en.php'); return false;">Privacy Policy</a>
+          |
+        <a class="nav-link" href="" onclick="window.open('/terms_en.php'); return false;">Terms & Conditions</a>
+      </p>
+      
+    
+</center>
+  </div>
+
+
+
+</body>
+
+</html>
